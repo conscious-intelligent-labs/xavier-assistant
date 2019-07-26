@@ -1,5 +1,7 @@
-I am just testing to see if I can push files to the repository yet.
-Testing out pushing to a branch called jmlap
+This repository will serve as the hub for our machine learning projects to incorporate with the other projects we do.
 
-aa
+Current plans revolve around setting up xavier assistant, where will skill build to provide support to the other projects, to include:
 
+- Voice activated network status reports from the network monitor
+- Voice control of PiRouter configuration
+- Alerts from network monitor and PiRouter for various events
