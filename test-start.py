@@ -23,7 +23,7 @@ def xavierResponse(audio):
     "speaks audio passed as argument"
     print(audio)
     for line in audio.splitlines():
-        os.system("espeak " + audio)
+        os.system(f"espeak {audio}")
 def myCommand():
     "listens for commands"
     r = sr.Recognizer()

@@ -20,7 +20,8 @@ def listen():
         return recognizer.recognize_google(audio)
 # or: return recognizer.recognize_google(audio)
     except speech_recognition.UnknownValueError:
-        print("Could not understand audio")
+        speak("I could not understand what you said")
+        return False
     except speech_recognition.RequestError as e:
         print("Recog Error; {0}".format(e))
     return ""
