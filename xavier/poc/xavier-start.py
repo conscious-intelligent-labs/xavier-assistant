@@ -3,7 +3,7 @@ import pyttsx3
 import os
 
 speech_engine = pyttsx3.init()
-speech_engine.setProperty('rate', 150)
+speech_engine.setProperty('rate', 175)
 
 # Define what to say
 def xavierResponse(audio) :
@@ -20,26 +20,26 @@ recognizer = speech_recognition.Recognizer()
 # Turn on the ears
 def xavierHears():
     with speech_recognition.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source, duration = 1)
+        recognizer.adjust_for_ambient_noise(source, duration = 0.5)
         audio = recognizer.listen(source)
     try:
-        request = recognizer.recognize_google(audio).lower()
+        askXavier = recognizer.recognize_google(audio).lower()
         # Having Xavier repeat what he thinks he heard for debugging
-        xavierResponse("You said: " + request + "\n")
-        return request
+        xavierResponse("You said: " + askXavier + "\n")
+        return askXavier
     except speech_recognition.UnknownValueError:
         print("I didn't catch that...")
-        request = xavierHears()
+        askXavier = xavierHears()
     except speech_recognition.RequestError as e:
         print("Recog Error; {0}".format(e))
-    return request
+    return askXavier
 
 # Turn on the brain
-def xavierThinks(request) :
-    if "hello xavier" in request :
+def xavierThinks(askXavier) :
+    if "hello xavier" in askXavier :
         xavierResponse("Hello there")
 
-    elif "go to sleep" in request :
+    elif "go to sleep" in askXavier :
         xavierResponse("okay, heading to bed!")
         exit(0)
 
