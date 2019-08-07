@@ -20,7 +20,7 @@ recognizer = speech_recognition.Recognizer()
 # Turn on the ears
 def xavierHears():
     with speech_recognition.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source, duration = 0.5)
+        recognizer.adjust_for_ambient_noise(source, duration = 1)
         audio = recognizer.listen(source)
     try:
         askXavier = recognizer.recognize_google(audio).lower()
