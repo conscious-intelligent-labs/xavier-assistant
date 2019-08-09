@@ -1,24 +1,17 @@
-This repository will serve as the hub for our machine learning projects to incorporate with the other projects we do.
+This repository houses the core code and skills needed to run our Xavier assistant.
 
-Current plans revolve around setting up xavier assistant, where we will skill build to provide support to the other projects, to include:
+Xavier Assitant will interface with and control our other projects with voice, with plans to include things like:
 
 - Voice activated network status reports from the network monitor
 - Voice control of PiRouter configuration
 - Alerts from network monitor and PiRouter for various events
 
-The first step we have is to give Xavier the ability to hear and talk.
-This is achieved by using Text-To-Speech (TTS) and Speech-To-Text(STT) engines.
-A number of options exist, many of them paid. For TTS, for the sake of Proof of Concept and to get working on skill building, a Free and Open Source Software (FOSS) package called PyTTSx3 (for Python 3) is being used. Google's default
-API is being used for the STT, using the package SpeechRecognition.
+Xavier will also handle various other standard assistant tasks.
 
-Moving forward, Mozilla's DeepSpeech project will be used on a server for STT, with MaryTTS also being run. This will give us the ability to train the Speech Recognition machine ourselves, and to customize the voice output of Xavier with MaryTTS.
+Xavier assistant uses the mimic engine to speak using Text-To-Speech (TTS) and the preliminary setup uses the SpeechRecognition python module with Google's Speech-To-Text (STT) API to listen. Optionally, PyTTSx3 can be used with an alternate start file or by modifying the start file if preferred, or if mimic is unavailable on the machine.
 
-The "thinking" portion of Xavier will be handled by our skill building, which can begin with the basic tools that we will start with.
-First steps:
+Mimic has 2 versions, mimic2 being the online and primary version which we will leave running on a service, with mimic1 as an offline fallback if no connection to the mimic2 server can be made. PyTTSx3 is a much more robotic-sounding option, but easier to setup and a bit more lightweight.
 
-- Simple "repeat after me" functionality that can be used to debug recognition
-- Open websites and read from them in certain cases
-- Modify files on the system
-- Connect to other computers using SSH and FTP and interact with them as needed
+This project is focused on privacy-oriented, lightweight, but powerful functionality. As such, moving forward, migration to alternative Speech Recognition options will be a priority. As it stands, the SpeechRecognition module provides built in functionality for a number of different recognition options, some paid and some free, with a couple being available offline.
 
-A couple of advantages to using PyTTSx3 are that it can be set up easily and does not require any server to run. It is lightweight, fully FOSS, and can run on Raspberry Pi without needing an external server. Disadvantage is the very robotic sound. MaryTTS will provide more robust speech output with customization.
+# Installation Instructions
