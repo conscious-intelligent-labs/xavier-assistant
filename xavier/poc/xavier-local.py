@@ -1,15 +1,26 @@
 import speech_recognition
 import snowboydecoder
+import sys
+import signal
 # import pyttsx3
 import os
+
+interrupted = False
+
+def signal_handler(signal, frame):
+    global interrupted
+    interrupted = True
+
+
+def interrupt_callback():
+    global interrupted
+    return interrupted
 
 # Define what to say
 def respond(audio) :
     print(audio)
     for line in audio.splitlines() :
         os.system('/home/jay/git/mimic1/mimic -t "' + audio + '"')
-
-recognizer = speech_recognition.Recognizer()
 
 # Only for use with pyttsx3 which will be implemented as a backup in future versions of this start file_path
 
@@ -20,6 +31,7 @@ recognizer = speech_recognition.Recognizer()
 #    speech_engine.runAndWait()
 
 # Turn on the ears
+recognizer = speech_recognition.Recognizer()
 def listen():
     with speech_recognition.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source, duration = 1)
@@ -35,8 +47,19 @@ def listen():
         except speech_recognition.UnknownValueError:
             print("I am sorry, I didn't catch that...")
         except speech_recognition.RequestError as e:
-            print("Recog Error; {0}".format(e))
+            print(f"Recog Error; {0}")
 
+# Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
+
+def wakeUp(words) :
+    sensitivity = [0.5]*len(models)
+    detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
+    callbacks = [lambda: respond("I'm awake sir"),
+                lambda: xavier("go to sleep")]
+    detector.start(detected_callback = callbacks,
+                   interrupt_check = interrupt_callback,
+                   sleep_time = 0.03)
+    detector.terminate()
 
 # Turn on the brain
 def xavier(command) :
@@ -48,6 +71,6 @@ def xavier(command) :
         exit(0)
     else :
         respond("i'm sorry, i'm not sure how you want me to respond to that")
-
-while True :
-    listen()
+modelPath = "/usr/local/lib/python3.7/dist-packages/models/"
+models = [f"{modelPath}Xavier.pmdl", f"{modelPath}GoToSleep.pmdl"]
+wakeUp(models)
