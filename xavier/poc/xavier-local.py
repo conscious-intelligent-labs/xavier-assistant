@@ -7,12 +7,12 @@ import os
 
 interrupted = False
 
-def signal_handler(signal, frame):
+def signal_handler(signal, frame) :
     global interrupted
     interrupted = True
 
 
-def interrupt_callback():
+def interrupt_callback() :
     global interrupted
     return interrupted
 
@@ -20,7 +20,7 @@ def interrupt_callback():
 def respond(audio) :
     print(audio)
     for line in audio.splitlines() :
-        os.system('/home/jay/git/mimic1/mimic -t "' + audio + '"')
+        os.system('mimic -t "' + audio + '"')
 
 # Only for use with pyttsx3 which will be implemented as a backup in future versions of this start file_path
 
@@ -32,11 +32,11 @@ def respond(audio) :
 
 # Turn on the ears
 recognizer = speech_recognition.Recognizer()
-def listen():
+def listen() :
     with speech_recognition.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source, duration = 1)
         audio = recognizer.listen(source)
-        try:
+        try :
             command = recognizer.recognize_google(audio).lower()
             # Only run the skills methods if the word starts with Xavier
             # if "xavier" in command :
@@ -50,11 +50,11 @@ def listen():
             print(f"Recog Error; {0}")
 
 # Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
-
+signal.signal(signal.SIGINT, signal_handler)
 def wakeUp(words) :
     sensitivity = [0.5]*len(models)
     detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
-    callbacks = [lambda: respond("I'm awake sir"),
+    callbacks = [lambda: respond("yes sir, is there something I can help you with? If i can do anything for you, just let me know!"),
                 lambda: xavier("go to sleep")]
     detector.start(detected_callback = callbacks,
                    interrupt_check = interrupt_callback,
