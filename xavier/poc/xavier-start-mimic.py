@@ -7,7 +7,7 @@ import os
 def respond(audio) :
     print(audio)
     for line in audio.splitlines() :
-        os.system('/home/jay/git/mimic1/mimic -t "' + audio + '"')
+        os.system('mimic -t "' + audio + '"')
 
 recognizer = speech_recognition.Recognizer()
 

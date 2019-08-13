@@ -46,29 +46,35 @@ def listen() :
 
         except speech_recognition.UnknownValueError:
             print("I am sorry, I didn't catch that...")
+            listen()
         except speech_recognition.RequestError as e:
             print(f"Recog Error; {0}")
 
 # Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
 signal.signal(signal.SIGINT, signal_handler)
 def wakeUp(words) :
-    sensitivity = [0.5]*len(models)
+    sensitivity = [0.5]*len(words)
     detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
-    callbacks = [lambda: respond("yes sir, is there something I can help you with? If i can do anything for you, just let me know!"),
+    callbacks = [lambda: xavierAwake(),
                 lambda: xavier("go to sleep")]
     detector.start(detected_callback = callbacks,
                    interrupt_check = interrupt_callback,
                    sleep_time = 0.03)
     detector.terminate()
 
+def xavierAwake() :
+    sensitivity = [0.5]*len()
+    detector = snowboydecoder.HotwordDetector(skillModels, sensitivity = sensitivity, audio_gain = 1)
+
+
+
 # Turn on the brain
 def xavier(command) :
     if "hello" in command :
         respond("Hello there, how are you doing today?")
-
-    elif "go to sleep" in command :
-        respond("okay, heading to bed!")
-        exit(0)
+    elif command == "xavier" :
+        respond("yes?")
+        listen()
     else :
         respond("i'm sorry, i'm not sure how you want me to respond to that")
 modelPath = "/usr/local/lib/python3.7/dist-packages/models/"

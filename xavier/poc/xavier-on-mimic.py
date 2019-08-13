@@ -6,7 +6,7 @@ import os
 def xavierResponse(audio) :
     print(audio)
     for line in audio.splitlines() :
-        os.system('~/git/mimic1/mimic -t "hello there JonMarc, this is a test of the sound output"')
+        os.system('mimic -t "hello there, this is a test of the sound output"')
 
         #os.system('~/git/mimic1/mimic -t "' + audio + '"\n')
 
@@ -32,7 +32,7 @@ def xavierHears():
 # Turn on the brain
 def xavierThinks(askXavier) :
     if "hello xavier" in askXavier :
-        xavierResponse("Hello there JonMarc, how are you doing today?")
+        xavierResponse("Hello there, how are you doing today?")
 
     elif "go to sleep" in askXavier :
         xavierResponse("okay, heading to bed!")
