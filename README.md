@@ -6,6 +6,15 @@
 
 ```bash
 git clone https://github.com/conscious-intelligent-labs/xavier-assistant.git
+cd xavier-assistant/xavier/xavier
+chmod 755 run.sh
+chmod 755 setup.sh
+
+# Setup project.
+./setup.sh
+
+# Start project.
+./run.sh
 ```
 
 ## Usage
