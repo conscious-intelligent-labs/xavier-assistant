@@ -55,7 +55,7 @@ signal.signal(signal.SIGINT, signal_handler)
 def wakeUp(words) :
     sensitivity = [0.5]*len(words)
     detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
-    callbacks = [lambda: xavierAwake(),
+    callbacks = [lambda: xavier("xavier"),
                 lambda: xavier("go to sleep")]
     detector.start(detected_callback = callbacks,
                    interrupt_check = interrupt_callback,
@@ -75,6 +75,9 @@ def xavier(command) :
     elif command == "xavier" :
         respond("yes?")
         listen()
+    elif "go to sleep" in command :
+        respond("okay, heading to bed")
+        exit(0)
     else :
         respond("i'm sorry, i'm not sure how you want me to respond to that")
 modelPath = "/usr/local/lib/python3.7/dist-packages/models/"
