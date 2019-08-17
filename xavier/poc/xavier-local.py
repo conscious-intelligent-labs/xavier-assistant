@@ -2,7 +2,6 @@ import speech_recognition
 import snowboydecoder
 import sys
 import signal
-# import pyttsx3
 import os
 
 interrupted = False
@@ -20,17 +19,9 @@ def interrupt_callback() :
 def respond(audio) :
     print(audio)
     for line in audio.splitlines() :
-        os.system('mimic -t "' + audio + '"')
+        os.system('mimic -t "' + audio + '" -voice awb') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
 
-# Only for use with pyttsx3 which will be implemented as a backup in future versions of this start file_path
-
-# speech_engine = pyttsx3.init()
-# speech_engine.setProperty('rate', 162)
-# def speak(text) :
-#    speech_engine.say(text)
-#    speech_engine.runAndWait()
-
-# Turn on the ears
+# Turn on the ears when needed.
 recognizer = speech_recognition.Recognizer()
 def listen() :
     with speech_recognition.Microphone() as source:
@@ -59,12 +50,8 @@ def wakeUp(words) :
                 lambda: xavier("go to sleep")]
     detector.start(detected_callback = callbacks,
                    interrupt_check = interrupt_callback,
-                   sleep_time = 0.03)
+                   sleep_time = 0.02)
     detector.terminate()
-
-def xavierAwake() :
-    sensitivity = [0.5]*len()
-    detector = snowboydecoder.HotwordDetector(skillModels, sensitivity = sensitivity, audio_gain = 1)
 
 
 
@@ -80,6 +67,7 @@ def xavier(command) :
         exit(0)
     else :
         respond("i'm sorry, i'm not sure how you want me to respond to that")
-modelPath = "/usr/local/lib/python3.7/dist-packages/models/"
+
+modelPath = "xavier/poc/models/"
 models = [f"{modelPath}Xavier.pmdl", f"{modelPath}GoToSleep.pmdl"]
 wakeUp(models)
