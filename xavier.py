@@ -67,8 +67,6 @@ def xavier(command) :
         exit(0)
     else :
         respond("i'm sorry, i'm not sure how you want me to respond to that")
-print("***DEBUG***")
-os.system("pwd")
 modelPath = "models/"
 models = [f"{modelPath}Xavier.pmdl", f"{modelPath}GoToSleep.pmdl"]
 wakeUp(models)
