@@ -16,6 +16,8 @@ else
     echo "$FILE does not exist"
     echo "Creating Virtual Environment"
     python3 -m venv ./
+    source bin/activate
+    python3 -m pip install -r requirements.txt
 fi
 
 echo "Done setup!"
