@@ -1,7 +1,36 @@
-This repository will serve as the hub for our machine learning projects to incorporate with the other projects we do.
+# Xavier AI-Assistant
 
-Current plans revolve around setting up xavier assistant, where we will skill build to provide support to the other projects, to include:
+"Xavier" is an AI Assistant with intelligent voice recognition and natural language understanding that gives you the ability to voice-enable any connected device that has a microphone and speaker and perform defined skills/task.
 
-- Voice activated network status reports from the network monitor
-- Voice control of PiRouter configuration
-- Alerts from network monitor and PiRouter for various events
+## Installation
+
+```bash
+git clone https://github.com/conscious-intelligent-labs/xavier-assistant.git
+cd xavier-assistant/xavier/xavier
+chmod 755 run.sh
+chmod 755 setup.sh
+
+# Setup project.
+./setup.sh
+
+# Start project.
+./run.sh
+```
+
+## Usage
+
+### Start Xavier.
+```bash
+cd xavier-assistant/xavier
+python ./manage.py runserver
+```
+
+### View Xavier via HTTP
+```bash
+http://127.0.0.1:8000
+```
+
+### View Xavier Skill Service Status via HTTP
+```bash
+http://127.0.0.1:8000/skills/status
+```
