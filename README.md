@@ -15,6 +15,9 @@ chmod 755 setup.sh
 
 # Start project.
 ./run.sh
+
+## Manually Install Mouth and Ears
+# Refer to wiki for manual mimic and snowboy installation instructions until this step is automated (see isues)
 ```
 
 ## Usage
