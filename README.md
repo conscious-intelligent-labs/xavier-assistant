@@ -1,17 +1,39 @@
-This repository houses the core code and skills needed to run our Xavier assistant.
+# Xavier AI-Assistant
 
-Xavier Assitant will interface with and control our other projects with voice, with plans to include things like:
+"Xavier" is an AI Assistant with intelligent voice recognition and natural language understanding that gives you the ability to voice-enable any connected device that has a microphone and speaker and perform defined skills/task.
 
-- Voice activated network status reports from the network monitor
-- Voice control of PiRouter configuration
-- Alerts from network monitor and PiRouter for various events
+## Installation
 
-Xavier will also handle various other standard assistant tasks.
+```bash
+git clone https://github.com/conscious-intelligent-labs/xavier-assistant.git
+cd xavier-assistant/xavier/xavier
+chmod 755 run.sh
+chmod 755 setup.sh
 
-Xavier assistant uses the mimic engine to speak using Text-To-Speech (TTS) and the preliminary setup uses the SpeechRecognition python module with Google's Speech-To-Text (STT) API to listen. Optionally, PyTTSx3 can be used with an alternate start file or by modifying the start file if preferred, or if mimic is unavailable on the machine.
+# Setup project.
+./setup.sh
 
-Mimic has 2 versions, mimic2 being the online and primary version which we will leave running on a service, with mimic1 as an offline fallback if no connection to the mimic2 server can be made. PyTTSx3 is a much more robotic-sounding option, but easier to setup and a bit more lightweight.
+# Start project.
+./run.sh
 
-This project is focused on privacy-oriented, lightweight, but powerful functionality. As such, moving forward, migration to alternative Speech Recognition options will be a priority. As it stands, the SpeechRecognition module provides built in functionality for a number of different recognition options, some paid and some free, with a couple being available offline.
+## Manually Install Mouth and Ears
+# Refer to wiki for manual mimic and snowboy installation instructions until this step is automated (see isues)
+```
 
-# Installation Instructions
+## Usage
+
+### Start Xavier.
+```bash
+cd xavier-assistant/xavier
+python ./manage.py runserver
+```
+
+### View Xavier via HTTP
+```bash
+http://127.0.0.1:8000
+```
+
+### View Xavier Skill Service Status via HTTP
+```bash
+http://127.0.0.1:8000/skills/status
+```
