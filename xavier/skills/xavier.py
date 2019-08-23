@@ -23,11 +23,11 @@ def respond(text) :
 
 # Turn on the ears when needed.
 recognizer = speech_recognition.Recognizer()
-def listen(audio) :
-    with speech_recognition.AudioFile(audio) as source:
+def listen(fname) :
+    with speech_recognition.AudioFile(fname) as source:
         audio = recognizer.record(source)
         try :
-            command = recognizer.recognize_google(audio).lower()
+            command = recognizer.recognize_google(audio)
             # Only run the skills methods if the word starts with Xavier
             # if "xavier" in command :
                 #Have Xavier repeat what he thinks you said for debugging, comment next line for skip that
@@ -38,7 +38,7 @@ def listen(audio) :
             print("I am sorry, I didn't catch that...")
         except speech_recognition.RequestError as e:
             print(f"Recog Error; {0}")
-    os.remove(audio)
+    os.remove(fname)
 
 # Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
 signal.signal(signal.SIGINT, signal_handler)
