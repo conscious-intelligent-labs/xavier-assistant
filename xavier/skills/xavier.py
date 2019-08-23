@@ -16,17 +16,16 @@ def interrupt_callback() :
     return interrupted
 
 # Define what to say
-def respond(audio) :
-    print(audio)
-    for line in audio.splitlines() :
-        os.system('mimic -t "' + audio + '" -voice awb') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
+def respond(text) :
+    print(text)
+    for line in text.splitlines() :
+        os.system('mimic -t "' + text + '" -voice awb') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
 
 # Turn on the ears when needed.
 recognizer = speech_recognition.Recognizer()
-def listen() :
-    with speech_recognition.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source, duration = 1)
-        audio = recognizer.listen(source)
+def listen(audio) :
+    with speech_recognition.AudioFile(audio) as source:
+        audio = recognizer.record(source)
         try :
             command = recognizer.recognize_google(audio).lower()
             # Only run the skills methods if the word starts with Xavier
@@ -37,18 +36,19 @@ def listen() :
 
         except speech_recognition.UnknownValueError:
             print("I am sorry, I didn't catch that...")
-            listen()
         except speech_recognition.RequestError as e:
             print(f"Recog Error; {0}")
+    os.remove(audio)
 
 # Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
 signal.signal(signal.SIGINT, signal_handler)
 def wakeUp(words) :
     sensitivity = [0.5]*len(words)
     detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
-    callbacks = [lambda: xavier("xavier"),
+    callbacks = [lambda: print('recording audio...', end='', flush=True),
                 lambda: xavier("go to sleep")]
     detector.start(detected_callback = callbacks,
+                   audio_recorder_callback = listen,
                    interrupt_check = interrupt_callback,
                    sleep_time = 0.02)
     detector.terminate()
