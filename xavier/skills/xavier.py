@@ -30,7 +30,7 @@ def listen(fname) :
             command = recognizer.recognize_google(audio)
             # Only run the skills methods if the word starts with Xavier
             # if "xavier" in command :
-                #Have Xavier repeat what he thinks you said for debugging, comment next line for skip that
+            # Have Xavier repeat what he thinks you said for debugging, comment next line for skip that
             respond(f'You said: {command} \n')
             xavier(command)
 
@@ -43,7 +43,7 @@ def listen(fname) :
 # Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
 signal.signal(signal.SIGINT, signal_handler)
 def wakeUp(words) :
-    sensitivity = [0.5]*len(words)
+    sensitivity = [0.38]*len(words)
     detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
     callbacks = [lambda: print('recording audio...', end='', flush=True),
                 lambda: xavier("go to sleep")]
