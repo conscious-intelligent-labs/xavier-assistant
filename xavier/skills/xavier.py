@@ -19,7 +19,7 @@ def interrupt_callback() :
 def respond(text) :
     print(text)
     for line in text.splitlines() :
-        os.system('mimic -t "' + text + '" -voice awb') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
+        os.system('mimic -t "' + text + '"') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
 
 # Turn on the ears when needed.
 recognizer = speech_recognition.Recognizer()
