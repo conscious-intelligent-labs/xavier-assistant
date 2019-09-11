@@ -4,5 +4,4 @@
 source bin/activate
 
 # Start server.
-sudo python ../manage.py runserver&
-
+sudo python3 ../manage.py runserver&
