@@ -13,13 +13,13 @@ def signal_handler(signal, frame) :
 
 def interrupt_callback() :
     global interrupted
-    return interrupted
+    return interrupted 
 
 # Define what to say
 def respond(text) :
     print(text)
     for line in text.splitlines() :
-        os.system('mimic -t "' + text + '"') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
+        os.system('mimic -t "' + text + '"\n') # "-voice awb" can be replaced with other voices, or removed entirely to use the default.
 
 # Turn on the ears when needed.
 recognizer = speech_recognition.Recognizer()
@@ -37,13 +37,13 @@ def listen(fname) :
         except speech_recognition.UnknownValueError:
             print("I am sorry, I didn't catch that...")
         except speech_recognition.RequestError as e:
-            print(f"Recog Error; {0}")
+            print(f"Recog Error; {e}")
     os.remove(fname)
 
 # Individual skills can be defined as functions and called from the callback lambdas, which can include functions to run detection again, etc.
 signal.signal(signal.SIGINT, signal_handler)
 def wakeUp(words) :
-    sensitivity = [0.38]*len(words)
+    sensitivity = [0.50]*len(words)
     detector = snowboydecoder.HotwordDetector(words, sensitivity = sensitivity, audio_gain = 1)
     callbacks = [lambda: print('recording audio...', end='', flush=True),
                 lambda: xavier("go to sleep")]
