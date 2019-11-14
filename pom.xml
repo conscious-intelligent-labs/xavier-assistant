@@ -108,7 +108,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>-Djava.library.path=/home/runner/work/xavier-assistant/xavier-assistant/target/classes/snow</argLine>
+					<argLine>-Djava.library.path=classes/snow</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
