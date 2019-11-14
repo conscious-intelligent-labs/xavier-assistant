@@ -1,3 +1,4 @@
+-Djava.library.path: "target/classes/snow:/usr/local/lib:/opt/local/lib:/usr/lib:/usr/lib64"
 name: Java CI
 
 on: [push]
@@ -14,4 +15,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file pom.xml -DargLine="-Djava.library.path=target/classes/snow"
